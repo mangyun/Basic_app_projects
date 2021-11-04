@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lotto_number_machine</string>
+    <string name="add">번호 추가하기</string>
+    <string name="clear">초기화</string>
+    <string name="run">자동생성시작</string>
+
+</resources>
