@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private var didRun = false //자동생성으로 인해 번호를 생성하지 못할 예외 처리 변수, 변화가능이므로 var
+    private var didRun = false //자동생성으로 인해 번호가 가득 찰 예외 처리 변수, 변화가능이므로 var
 
     private val pickNumberSet = mutableSetOf<Int>() // 중복을 방지하기위한 셋
 
@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         initRunButton()
         initAddButton()
+        initClearButton()
     }
 
     private fun initAddButton() {
@@ -85,23 +86,51 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initClearButton() {
+        clearButton.setOnClickListener {
+            pickNumberSet.clear()//초기화
+            numberTextViewList.forEach {
+                it.isVisible = false// textView를 forEach로 각각 가져와 다 안보이게 설정. for문이랑 비슷함
+            }
+            didRun = false
+        }
+
+
+    }
+
     private fun initRunButton() {
         runButton.setOnClickListener {
             val list = getRandomNumber()
 
-            Log.d("main", list.toString())
+            //이전의 forEach만 쓴다면 몇번째의 값인지 알 수 없기때문에, Indexed를 이용
+            list.forEachIndexed { index, number ->
+                val textView = numberTextViewList[index]
+
+                textView.text = number.toString()
+                textView.isVisible = true
+
+            }
+            didRun = true
+
         }
     }
 
     private fun getRandomNumber(): List<Int> {
         val numberList = mutableListOf<Int>().apply {
             for (i in 1..45) {
+                if (pickNumberSet.contains(i)) {
+                    continue // 랜덤번호를 생성할때 이미 있는 번호를 제외
+                }
                 this.add(i)
             }
         }
         numberList.shuffle()
-        val newList = numberList.subList(0, 6)
+
+        //이미 선택된 셋을 toList로 변환해주고, 나머지를 numberList에서 추가함
+        val newList = pickNumberSet.toList() + numberList.subList(0, 6 - pickNumberSet.size)
+
         return newList.sorted()
 
     }
 }
+
