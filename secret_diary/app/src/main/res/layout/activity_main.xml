@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/bm_font"
-        android:text="The Secret Garden"
+        android:text="The Secret Diary"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/passwordLayout"

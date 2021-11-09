@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DiaryActivity"
+            android:theme="@style/Theme.Secret_diary.NoActionBar" />//다이어리도 NoActionBar로 설정
     </application>
 
 </manifest>

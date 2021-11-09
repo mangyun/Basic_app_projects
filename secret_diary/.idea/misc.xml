@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/auddb/AndroidStudioProjects/secret_diary/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/secret_diary/app/src/main/res/layout/activity_diary.xml" value="0.33" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/secret_diary/app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>
   </component>
