@@ -31,3 +31,4 @@ android-ktx 로 SharedPreference 사용하기 (Kotlin Android Extension)
 
 다이어리 내용을 앱이 종료되더라도 기기에 저장하는 기능
 
+ 
