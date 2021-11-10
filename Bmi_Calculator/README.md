@@ -10,7 +10,7 @@
 
 ## 결과화면
 ![image](https://user-images.githubusercontent.com/88188850/140473784-d316747b-47bc-4ca3-b497-f0ac4b317049.png)   ![image](https://user-images.githubusercontent.com/88188850/140473850-2eb61750-8f4e-4fbe-b386-4e1bef8663df.png)
-
+ 
 ## 복습한 것
 - LinearLayout 사용하는 법
 - TextView 의 속성들과 사용하는 법
