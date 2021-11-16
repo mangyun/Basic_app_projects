@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/auddb/AndroidStudioProjects/calculator/app/src/main/res/drawable/button_background.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/calculator/app/src/main/res/drawable/button_background_green.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/auddb/AndroidStudioProjects/calculator/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/auddb/AndroidStudioProjects/calculator/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/calculator/app/src/main/res/layout/history_row.xml" value="0.24954710144927536" />
       </map>
     </option>
   </component>

@@ -7,11 +7,16 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.room.Room
+import com.leemyeongyun.calculator.model.History
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +28,28 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.resultTextView)
     }
 
+    private val historyLayout: View by lazy { //constraint레이아웃보다는 view에도 visibility 기능이 있으므로 사용
+        findViewById(R.id.historyLayout)
+    }
+
+    private val historyLinearLayout: LinearLayout by lazy {
+        findViewById(R.id.historyLinearLayout)
+    }
+
+    lateinit var db: AppDatabase
+
     private var isOperator = false // 연산자 입력시
     private var hasOperator = false // 연산자가 이미 있을시시
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //앱 DB 생성
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "historyDB"
+        ).build()
     }
 
     //인자를 view로 받아, 각 상황에서 클릭함수 구현
@@ -119,12 +141,12 @@ class MainActivity : AppCompatActivity() {
     fun resultButtonClicked(v: View) {
         val expressionTexts = expressionTextView.text.split(" ")
 
-        if ( expressionTextView.text.isEmpty() || expressionTexts.size == 1){ //비어있거나, 숫자가 1개인 경우
+        if (expressionTextView.text.isEmpty() || expressionTexts.size == 1) { //비어있거나, 숫자가 1개인 경우
             Toast.makeText(this, "수식을 완성해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if(expressionTexts.size != 3 && hasOperator){
+        if (expressionTexts.size != 3 && hasOperator) {
             Toast.makeText(this, "아직 완성되지 않은 수식입니다.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -136,13 +158,17 @@ class MainActivity : AppCompatActivity() {
         val expressionText = expressionTextView.text.toString()
         val resultText = calculateExpression()
 
+        //메인쓰레드가 아닌 새로운 쓰레드로 DB에 하나씩 삽입
+        Thread(Runnable {
+            db.historyDao().insertHistory(History(null, expressionText, resultText))
+        }).start()
+
         //미관상 값을 expressionTextview쪽으로 이동시켜 출력
         resultTextView.text = ""
         expressionTextView.text = resultText
 
         isOperator = false
         hasOperator = false
-
 
 
     }
@@ -180,7 +206,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun historyButtonClicked(v: View) {
+        historyLayout.isVisible = true
+        historyLinearLayout.removeAllViews()//linear레이아웃 하위의 모든 뷰들이 삭제
 
+        //DB에서 모든 기록 가져오기
+        Thread(Runnable {
+            db.historyDao().getAll().reversed().forEach {//최신것이 나중에 저장되므로, 제일 위로 보여주기위해 reverse()
+                runOnUiThread() {
+                    val historyView =
+                        LayoutInflater.from(this).inflate(R.layout.history_row, null, false)
+                    historyView.findViewById<TextView>(R.id.expressionTextView).text = it.expression
+                    historyView.findViewById<TextView>(R.id.resultTextView).text = "= ${it.result}"
+
+                    historyLinearLayout.addView(historyView)
+                }
+            }
+        }).start()
+
+    }
+
+    fun closeHistoryButtonClicked(v: View) {
+        historyLayout.isVisible = false
+    }
+
+    fun historyClearButtonClicked(v: View) {
+        historyLinearLayout.removeAllViews()
+        Thread(Runnable {
+            db.historyDao().deleteAll()
+        }).start()
     }
 
 
