@@ -71,6 +71,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initStartPhotoFrameModeButton() {
+        startPhotoFrameModeButton.setOnClickListener {
+            val intent = Intent(this, PhotoFrameActivity::class.java)
+            imageUriList.forEachIndexed { index, uri -> //uri자체를 넘길수 없으니, string으로 바꿔서 넘김
+                intent.putExtra("photo$index", uri.toString())//각각의 키를 photo번호로 가져오기위해서
+            }
+            intent.putExtra("photoListSize", imageUriList.size)//몇번째까지 가져와야하는지
+            startActivity(intent)
+
+
+        }
+    }
+
     //위의 requestPermissions의 콜백으로 pervmissionResult 처리
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
@@ -117,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (selectedImageUri != null) {
 
-                    if ( imageUriList.size == 6){
+                    if (imageUriList.size == 6) {
                         Toast.makeText(this, "이미 사진이 가득 찼습니다.", Toast.LENGTH_SHORT).show()
                     }
                     imageUriList.add(selectedImageUri)
@@ -152,9 +165,6 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun initStartPhotoFrameModeButton() {
-
-    }
 
 }
 

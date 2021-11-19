@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">//세로를 가로 축 기준으로 3:1비율로
 
         //각 가중치 1에 맞게 설정
+
         <ImageView
             android:id="@+id/imageView1_1"
             android:layout_width="0dp"
@@ -49,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/firstRowLinearLayout">//세로를 가로 축 기준으로 3:1비율로
 
         //각 가중치 1에 맞게 설정
+
         <ImageView
             android:id="@+id/imageView2_1"
             android:layout_width="0dp"

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.leemyeongyun.electronic_frame">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     // 이 앱이 READ_EXTERNAL_STORAGE 권한이 필요하다는것을 정의함
 
     <application
@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PhotoFrameActivity"
+            android:screenOrientation="landscape" /> // 이 액티비티를 가로화면으로 지정
+        // frameActivity 연결
     </application>
 
 </manifest>
