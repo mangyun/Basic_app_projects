@@ -8,7 +8,8 @@
         <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/drawable/ic_play.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/drawable/ic_record.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/drawable/ic_stop.xml" value="0.2101851851851852" />
-        <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/layout/activity_main.xml" value="0.1778115501519757" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/drawable/shape_oval_button.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/auddb/AndroidStudioProjects/recorder/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>
   </component>

@@ -12,6 +12,10 @@ class RecordButton(
     attrs: AttributeSet
 ) : AppCompatImageButton(context, attrs) {
 
+    init{
+        setBackgroundResource(R.drawable.shape_oval_button)
+    }
+
     fun updateIconWithState(state: State) {
         when (state) {
             State.BEFORE_RECORDING -> { // 녹음 전
@@ -23,7 +27,7 @@ class RecordButton(
             State.AFTER_RECORDING -> { // 녹음 후
                 setImageResource(R.drawable.ic_play)
             }
-            State.ON_PLAYING -> {// 재생 중중
+            State.ON_PLAYING -> {// 재생 중
                 setImageResource(R.drawable.ic_stop)
 
             }
